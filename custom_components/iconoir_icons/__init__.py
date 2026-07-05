@@ -11,11 +11,12 @@ from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import config_validation
+from homeassistant.loader import async_get_integration
 
 DOMAIN = "iconoir_icons"
 FRONTEND_SCRIPT_URL = f"/{DOMAIN}/main.js"
 
-CONFIG_SCHEMA = config_validation.empty_config_schema(DOMAIN)
+CONFIG_SCHEMA = config_validation.config_entry_only_config_schema(DOMAIN)
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -31,12 +32,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 )
             ]
         )
-        hass.data[DOMAIN] = True
-    add_extra_js_url(hass, FRONTEND_SCRIPT_URL)
+    # Version the URL so the long-lived static cache busts on updates.
+    integration = await async_get_integration(hass, DOMAIN)
+    url = f"{FRONTEND_SCRIPT_URL}?v={integration.version}"
+    hass.data[DOMAIN] = url
+    add_extra_js_url(hass, url)
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Stop injecting the module into new frontend loads."""
-    remove_extra_js_url(hass, FRONTEND_SCRIPT_URL)
+    if url := hass.data.get(DOMAIN):
+        remove_extra_js_url(hass, url)
     return True

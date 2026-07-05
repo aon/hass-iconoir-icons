@@ -2,7 +2,6 @@
 // 28 icons from Iconoir "regular" (1.5px stroke), converted to single
 // filled paths via real polygon offset. Use as: icon: iconoir:<name>
 // https://iconoir.com — MIT licensed.
-const DOMAIN = "iconoir_icons";
 const VIEWBOX = "0 0 24 24";
 const ICONS = {
   "bed": "M4.9 1.3L19.2 1.3L19.6 1.3L19.9 1.4L20.2 1.5L20.5 1.7L20.8 1.9L21 2.2L21.3 2.4L21.4 2.7L21.6 3L21.7 3.4L21.7 3.7L21.8 4L21.7 20L21.7 20.3L21.7 20.7L21.6 21L21.4 21.3L21.2 21.6L21 21.9L20.8 22.1L20.5 22.3L20.2 22.5L19.9 22.6L19.6 22.7L19.2 22.7L18.9 22.8L4.9 22.7L4.6 22.7L4.2 22.6L3.9 22.5L3.6 22.4L3.3 22.2L3.1 22L2.8 21.7L2.6 21.4L2.5 21.1L2.4 20.8L2.3 20.5L2.3 20.1L2.3 3.8L2.3 3.5L2.4 3.2L2.5 2.8L2.7 2.5L2.9 2.3L3.1 2L3.4 1.8L3.6 1.6L4 1.5L4.3 1.3L4.6 1.3ZM19.1 2.8L5 2.8L4.8 2.8L4.7 2.8L4.5 2.9L4.4 2.9L4.2 3L4.1 3.1L4 3.2L3.9 3.4L3.9 3.5L3.8 3.6L3.8 3.8L3.8 4L3.8 7.3L10.3 7.3L10.3 6L10.4 5.5L10.9 5.3L11.4 5.4L11.8 6L11.8 8L11.6 8.5L11 8.8L3.8 8.8L3.8 20.1L3.8 20.2L3.8 20.4L3.9 20.5L3.9 20.7L4 20.8L4.1 20.9L4.3 21L4.4 21.1L4.5 21.2L4.7 21.2L4.8 21.2L5 21.2L18.9 21.3L19.1 21.2L19.3 21.2L19.4 21.2L19.6 21.1L19.7 21L19.8 20.9L19.9 20.8L20 20.7L20.1 20.6L20.2 20.4L20.2 20.3L20.2 20.1L20.3 19.9L20.3 8.8L13 8.8L12.5 8.6L12.3 8L12.3 6L12.4 5.5L12.9 5.3L13.4 5.4L13.8 6L13.8 7.3L20.3 7.3L20.3 4L20.2 3.8L20.2 3.7L20.2 3.5L20.1 3.4L20 3.3L19.9 3.2L19.8 3L19.7 3L19.5 2.9L19.4 2.8L19.2 2.8Z",
@@ -37,21 +36,25 @@ const ICONS = {
 
 async function getIcon(name) {
   const d = ICONS[name];
-  if (!d) return {};
+  if (!d) {
+    console.warn(`iconoir-icons: unknown icon "${name}"`);
+    return {};
+  }
   return { path: d, viewBox: VIEWBOX };
 }
 
-const ICON_LIST = Object.keys(ICONS).map((name) => ({ name }));
-
 async function getIconList() {
-  return ICON_LIST;
+  return Object.keys(ICONS).map((name) => ({ name }));
 }
 
 window.customIcons = window.customIcons || {};
 window.customIcons["iconoir"] = { getIcon, getIconList };
 
+window.customIconsets = window.customIconsets || {};
+window.customIconsets["iconoir"] = getIcon;
+
 console.info(
-  "%c iconoir-icons %c v1.1.0 ",
+  "%c iconoir-icons %c v1.1.1 ",
   "color:#fff;font-weight:bold;background:#111",
   "color:#111;font-weight:bold;background:#fff"
 );
