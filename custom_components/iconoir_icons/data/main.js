@@ -41,18 +41,17 @@ async function getIcon(name) {
   return { path: d, viewBox: VIEWBOX };
 }
 
+const ICON_LIST = Object.keys(ICONS).map((name) => ({ name }));
+
 async function getIconList() {
-  return Object.keys(ICONS).map((name) => ({ name }));
+  return ICON_LIST;
 }
 
 window.customIcons = window.customIcons || {};
 window.customIcons["iconoir"] = { getIcon, getIconList };
 
-window.customIconsets = window.customIconsets || {};
-window.customIconsets["iconoir"] = getIcon;
-
 console.info(
-  "%c iconoir-icons %c v1.0.0 ",
+  "%c iconoir-icons %c v1.1.0 ",
   "color:#fff;font-weight:bold;background:#111",
   "color:#111;font-weight:bold;background:#fff"
 );
