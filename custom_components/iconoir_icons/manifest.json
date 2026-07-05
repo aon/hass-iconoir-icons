@@ -1,0 +1,12 @@
+{
+  "domain": "iconoir_icons",
+  "name": "Iconoir Icons",
+  "documentation": "https://github.com/aon/hass-iconoir-icons",
+  "issue_tracker": "https://github.com/aon/hass-iconoir-icons/issues",
+  "dependencies": ["http", "frontend"],
+  "codeowners": ["@aon"],
+  "requirements": [],
+  "config_flow": true,
+  "iot_class": "local_polling",
+  "version": "1.0.0"
+}
