@@ -1,0 +1,5 @@
+This project bundles icons from Iconoir (https://iconoir.com),
+Copyright (c) Luca Burgio and Iconoir contributors, licensed under the MIT License.
+
+The icons have been converted from Iconoir's stroke-based SVGs into single
+filled paths for compatibility with Home Assistant's icon API.

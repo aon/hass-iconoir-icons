@@ -2,11 +2,6 @@ MIT License
 
 Copyright (c) 2026 Agustin Aon
 
-Icons are from Iconoir (https://iconoir.com), Copyright (c) Luca Burgio and
-Iconoir contributors, also under the MIT License. The icons in this repository
-have been converted from Iconoir's stroke SVGs into single filled paths for
-compatibility with Home Assistant's icon API.
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
