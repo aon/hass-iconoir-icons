@@ -35,9 +35,29 @@ Verify a name is available from the browser console:
 await window.customIcons.iconoir.getIcon("sofa"); // { path: "...", viewBox: "0 0 24 24" }
 ```
 
+## Stroke width
+
+Because Home Assistant renders each icon as a **filled** path, the stroke
+weight is baked into the geometry — it can't be changed with CSS. Instead the
+pack bundles the icons pre-generated at several widths, and you pick one:
+
+**Settings → Devices & Services → Iconoir Icons → Configure → Stroke width.**
+
+| Width | Feel |
+| ----- | ---- |
+| `1.0 px` | thin / delicate |
+| `1.25 px` | light |
+| `1.5 px` | default (Iconoir's native weight) |
+| `1.75 px` | bold |
+| `2.0 px` | heavy |
+
+After changing it, **reload the browser** — the new width applies to fresh
+frontend loads. (Internally the integration serves `main.js?w=<width>`; the
+changed URL also busts the cache.)
+
 ## Included icons
 
-`bed` `chromecast` `cloud` `cloud-sunny` `cutlery` `desk` `droplet` `fog`
+`bed` `chromecast` `cloud` `cloud-sunny` `compact-disc` `cutlery` `desk` `droplet` `fog`
 `half-moon` `heavy-rain` `home-simple` `lamp` `light-bulb` `log-out` `movie`
 `rain` `smartphone-device` `snow` `sofa` `sun-light` `switch-off`
 `temperature-high` `thunderstorm` `tv` `video-projector` `warning-triangle`
